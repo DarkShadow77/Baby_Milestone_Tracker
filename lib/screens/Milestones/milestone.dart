@@ -122,7 +122,7 @@ class _MilestoneState extends State<Milestone>
                       "assets/image/icons/search.png",
                       width: 25.w,
                     ),
-                    10.width,
+                    20.width,
                     Image.asset(
                       "assets/image/icons/filter.png",
                       width: 25.w,

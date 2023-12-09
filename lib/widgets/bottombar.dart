@@ -4,7 +4,6 @@ import 'package:babylid/utils/appcolors.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ionicons/ionicons.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({
@@ -82,12 +81,10 @@ class BottomBar extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            onTap: addPressed,
-            child: BottomBarFloatingButton(
-              actionTabButtonWidth: 65.w,
-              actionTabButtonHeight: 65.h,
-            ),
+          BottomBarFloatingButton(
+            onPressed: addPressed,
+            actionTabButtonWidth: 65.w,
+            actionTabButtonHeight: 65.h,
           )
         ],
       ),
@@ -100,134 +97,139 @@ class BottomBarFloatingButton extends StatelessWidget {
     Key? key,
     required this.actionTabButtonWidth,
     required this.actionTabButtonHeight,
+    required this.onPressed,
   }) : super(key: key);
 
   final double actionTabButtonWidth;
   final double actionTabButtonHeight;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       heightFactor: .4,
-      child: Container(
-        width: actionTabButtonWidth,
-        height: actionTabButtonHeight,
-        padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(5, 5),
-              blurRadius: 5,
-              color: Colors.white.withOpacity(0.20),
-              inset: true,
-            ),
-            const BoxShadow(
-              offset: Offset(-5, -5),
-              blurRadius: 5,
-              color: Colors.white,
-              inset: true,
-            )
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(40),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 20,
-              sigmaY: 20,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    const Color(0xffdadfe7).withOpacity(0.20),
-                    const Color(0xfff5f5f9).withOpacity(0.20),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(5, 5),
-                    blurRadius: 12,
-                    color: const Color(0xff8e9bae).withOpacity(0.10),
-                  )
-                ],
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          width: actionTabButtonWidth,
+          height: actionTabButtonHeight,
+          padding: const EdgeInsets.all(2),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(5, 5),
+                blurRadius: 5,
+                color: AppColors.fadedBlack,
+                inset: true,
               ),
-              child: Center(
-                child: Container(
-                  padding: const EdgeInsets.all(1),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: const LinearGradient(
-                      colors: [
-                        Colors.white,
-                        Color(0xffaeaeae),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: const Offset(0, 9),
-                        blurRadius: 18,
-                        color: const Color(0xff8e9bae).withOpacity(0.20),
-                      ),
+              BoxShadow(
+                offset: Offset(-5, -5),
+                blurRadius: 5,
+                color: AppColors.fadedBlack,
+                inset: true,
+              )
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(40),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 20,
+                sigmaY: 20,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    colors: [
+                      AppColors.orange,
+                      AppColors.white,
                     ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                   ),
-                  child: Center(
-                    child: Container(
-                      width: 7.h,
-                      height: 7.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [
-                            AppColors.blue,
-                            AppColors.orange,
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(5, 5),
-                            blurRadius: 5,
-                            color: Colors.white,
-                            inset: true,
-                          ),
-                          BoxShadow(
-                            offset: Offset(-5, -5),
-                            blurRadius: 5,
-                            color: Colors.white,
-                            inset: true,
-                          ),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(5, 5),
+                      blurRadius: 12,
+                      color: const Color(0xff8e9bae).withOpacity(0.10),
+                    )
+                  ],
+                ),
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: const LinearGradient(
+                        colors: [
+                          AppColors.white,
+                          Color(0xffaeaeae),
                         ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      child: Center(
-                        child: Container(
-                          width: 5.h,
-                          height: 5.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.subWhite.withOpacity(.8),
-                            shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(0, 9),
+                          blurRadius: 18,
+                          color: const Color(0xff8e9bae).withOpacity(0.20),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 50.w,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [
+                              AppColors.blue,
+                              AppColors.orange,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                          child: ShaderMask(
-                            blendMode: BlendMode.srcATop,
-                            shaderCallback: (bounds) => LinearGradient(
-                              colors: [
-                                AppColors.blue,
-                                AppColors.orange,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ).createShader(bounds),
-                            child: const Icon(
-                              Icons.add_rounded,
-                              color: Colors.white,
-                              size: 34,
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(5, 5),
+                              blurRadius: 5,
+                              color: AppColors.white,
+                              inset: true,
+                            ),
+                            BoxShadow(
+                              offset: Offset(-5, -5),
+                              blurRadius: 5,
+                              color: AppColors.white,
+                              inset: true,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Container(
+                            width: 40.w,
+                            height: 40.h,
+                            decoration: BoxDecoration(
+                              color: AppColors.white.withOpacity(.6),
+                              shape: BoxShape.circle,
+                            ),
+                            child: ShaderMask(
+                              blendMode: BlendMode.srcATop,
+                              shaderCallback: (bounds) => LinearGradient(
+                                colors: [
+                                  AppColors.blue,
+                                  AppColors.orange,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ).createShader(bounds),
+                              child: Icon(
+                                Icons.add_rounded,
+                                color: AppColors.white,
+                                size: 40.sp,
+                              ),
                             ),
                           ),
                         ),

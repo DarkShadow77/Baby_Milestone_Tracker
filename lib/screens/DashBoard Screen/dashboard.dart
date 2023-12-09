@@ -1,5 +1,6 @@
 import 'package:age_calculator/age_calculator.dart';
 import 'package:babylid/main.dart';
+import 'package:babylid/screens/Milestones/provider.dart';
 import 'package:babylid/screens/account_provider.dart';
 import 'package:babylid/utils/appcolors.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class _DashBoardState extends State<DashBoard> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<UserProvider>(context, listen: false).loadUser();
+      Provider.of<MilestoneProvider>(context, listen: false).fetchMilestones();
     });
     super.initState();
   }
@@ -120,9 +122,15 @@ class _DashBoardState extends State<DashBoard> {
                   padding:
                       EdgeInsets.symmetric(vertical: 20.h, horizontal: 30.w),
                   decoration: BoxDecoration(
-                    color: AppColors.subOrange,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                      color: AppColors.subOrange,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: AppColors.grey1,
+                          offset: Offset(0, 2),
+                          blurRadius: 4,
+                        )
+                      ]),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -376,7 +384,6 @@ class _DashBoardState extends State<DashBoard> {
                         child: Container(
                           height: 50.h,
                           decoration: BoxDecoration(
-                            color: const Color(0xff91b187),
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: const [
                               BoxShadow(
@@ -384,6 +391,203 @@ class _DashBoardState extends State<DashBoard> {
                                 color: AppColors.white,
                               )
                             ],
+                          ),
+                          child: Material(
+                            color: const Color(0xff91b187),
+                            borderRadius: BorderRadius.circular(15),
+                            child: InkWell(
+                              onTap: () {},
+                              splashColor: AppColors.black.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(15),
+                              child: Center(
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 16.sp,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: "+ ",
+                                        style: TextStyle(
+                                          fontSize: 24.sp,
+                                        ),
+                                      ),
+                                      const TextSpan(
+                                        text: "Edit Height",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      20.width,
+                      Expanded(
+                        child: Container(
+                          height: 50.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: const [
+                              BoxShadow(
+                                offset: Offset(-4, -4),
+                                color: AppColors.white,
+                              )
+                            ],
+                          ),
+                          child: Material(
+                            color: const Color(0xff53331f),
+                            borderRadius: BorderRadius.circular(15),
+                            child: InkWell(
+                              onTap: () {},
+                              splashColor: AppColors.black.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(15),
+                              child: Center(
+                                child: RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 16.sp,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: "+ ",
+                                        style: TextStyle(
+                                          fontSize: 24.sp,
+                                        ),
+                                      ),
+                                      const TextSpan(
+                                        text: "Edit Weight",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 175.h,
+                    margin: EdgeInsets.symmetric(vertical: 30.h),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
+                    decoration: BoxDecoration(
+                      color: const Color(0xff483285),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 175.h,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/image/bg_baby.png"),
+                              ),
+                            ),
+                          ),
+                        ),
+                        15.width,
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      height: 20.h,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white.withOpacity(.3),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Tips",
+                                          softWrap: true,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.grey1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(),
+                                  )
+                                ],
+                              ),
+                              Text(
+                                "Newborn Baby Care Advice & Tips",
+                                softWrap: true,
+                                maxLines: 3,
+                                style: TextStyle(
+                                  fontSize: 26.sp,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w900,
+                                  color: AppColors.subWhite2,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      height: 40.h,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Learn More",
+                                          softWrap: true,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.fadedBlack,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  /*Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 120.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              width: 1,
+                              color: const Color(0xff483285),
+                            ),
                           ),
                           child: Center(
                             child: RichText(
@@ -408,19 +612,16 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ),
                       ),
-                      20.width,
+                      8.width,
                       Expanded(
                         child: Container(
-                          height: 50.h,
+                          height: 120.h,
                           decoration: BoxDecoration(
-                            color: const Color(0xff53331f),
                             borderRadius: BorderRadius.circular(15),
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(-4, -4),
-                                color: AppColors.white,
-                              )
-                            ],
+                            border: Border.all(
+                              width: 1,
+                              color: const Color(0xff91b187),
+                            ),
                           ),
                           child: Center(
                             child: RichText(
@@ -437,7 +638,40 @@ class _DashBoardState extends State<DashBoard> {
                                     ),
                                   ),
                                   const TextSpan(
-                                    text: "Edit Weight",
+                                    text: "Edit Height",
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      8.width,
+                      Expanded(
+                        child: Container(
+                          height: 120.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                width: 1,
+                                color: const Color(0xff53331f),
+                              )),
+                          child: Center(
+                            child: RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16.sp,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "+ ",
+                                    style: TextStyle(
+                                      fontSize: 24.sp,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text: "Edit Height",
                                   ),
                                 ],
                               ),
@@ -446,7 +680,7 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ),
                     ],
-                  ),
+                  ),*/
                 ],
               ),
             ),

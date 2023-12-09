@@ -382,7 +382,6 @@ class MilestoneLongTextField extends StatelessWidget {
         textAlign: TextAlign.start,
         keyboardType: TextInputType.multiline,
         textInputAction: TextInputAction.newline,
-        textCapitalization: TextCapitalization.words,
         style: TextStyle(
           color: AppColors.grey03,
           fontSize: 20.sp,
