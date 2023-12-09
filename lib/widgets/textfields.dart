@@ -53,7 +53,7 @@ class RefillDropdown extends StatelessWidget {
                 text,
                 maxLines: 1,
                 style: TextStyle(
-                  color: AppColors.subWhite4,
+                  color: AppColors.grey1,
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                 ),
@@ -144,7 +144,7 @@ class RefillTextField extends StatelessWidget {
         keyboardType: textInputType,
         textCapitalization: textCapitalization,
         style: TextStyle(
-          color: AppColors.subWhite4,
+          color: AppColors.grey1,
           fontSize: 20.sp,
           fontWeight: FontWeight.bold,
         ),

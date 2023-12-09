@@ -6,9 +6,14 @@ class AppColors {
   static const Color primaryColor = Color(0xff3E2F8A);
   static const Color secondaryColor = Color(0xffF3F0FF);
   static const Color black = Color(0xff130f26);
+  static const Color fadedBlack = Color(0xff1F1B36);
   static const Color subBlack = Color(0xff6a6372);
-  static const Color white = Color(0xffffffff);
+  static const Color white = Color(0xffede1ce);
   static const Color orange = Color(0xffff7261);
+  static const Color subOrange = Color(0xffd9928b);
+
+  static Color blue = const Color(0xff014086);
+  static Color subBlue = const Color(0xffA6BCD5);
 
   static Color red = const Color(0xffEB5757);
   static const Color grey1 = Color(0xffbab9c0);

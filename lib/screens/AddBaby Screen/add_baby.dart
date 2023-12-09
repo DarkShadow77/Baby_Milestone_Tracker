@@ -1,11 +1,16 @@
+import 'package:babylid/models/account.dart';
+import 'package:babylid/screens/Main%20Screen/mainScreen.dart';
+import 'package:babylid/screens/account_provider.dart';
 import 'package:babylid/utils/appcolors.dart';
 import 'package:babylid/widgets/textfields.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 class AddBaby extends StatefulWidget {
   const AddBaby({super.key});
@@ -27,9 +32,34 @@ class _AddBabyState extends State<AddBaby> {
   bool nameFocused = false;
   bool nameError = false;
   bool dateError = false;
+  bool relationshipError = false;
 
   String name = "";
   String date = "Baby's Birth Date";
+  late DateTime dateInput;
+
+  Future _add() async {
+    name = _nameController.text.trim();
+
+    setState(() {
+      nameError = name.length < 3 ? true : false;
+      dateError = date == "Baby's Birth Date" ? true : false;
+      relationshipError = relationshipValue == 0 ? true : false;
+    });
+    if (nameError == false &&
+        dateError == false &&
+        relationshipError == false) {
+      Provider.of<UserProvider>(context, listen: false).saveUser(
+        BabyAccount(
+          name: name,
+          gender: genderValue,
+          relationship: relationshipValue,
+          dateOfBirth: dateInput,
+        ),
+      );
+      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+    }
+  }
 
   void _handleFocusChange() {
     name = _nameController.text.trim();
@@ -53,7 +83,8 @@ class _AddBabyState extends State<AddBaby> {
     return Scaffold(
       backgroundColor: AppColors.black,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -74,7 +105,8 @@ class _AddBabyState extends State<AddBaby> {
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 20.sp,
-                  color: AppColors.grey1,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.grey03,
                 ),
               ),
               30.height,
@@ -117,12 +149,14 @@ class _AddBabyState extends State<AddBaby> {
                         print('change $date');
                       }
                     },
-                    onConfirm: (dateInput) {
+                    onConfirm: (dateInputs) {
                       if (kDebugMode) {
-                        print('confirm $date');
+                        print('confirm $dateInputs');
                       }
                       setState(() {
-                        date = dateInput.toString();
+                        dateInput = dateInputs;
+                        date = DateFormat('EEEE, MMMM d, y').format(dateInputs);
+                        dateError = date == "Baby's Birth Date" ? true : false;
                       });
                     },
                     currentTime: DateTime.now(),
@@ -194,16 +228,30 @@ class _AddBabyState extends State<AddBaby> {
               15.height,
               Row(
                 children: [
-                  relationshipButton("Male", 1),
+                  relationshipButton("Mom", 1),
                   20.width,
-                  relationshipButton("Female", 2),
+                  relationshipButton("Dad", 2),
                   20.width,
                   relationshipButton("Other", 3),
                 ],
               ),
+              if (relationshipError) ...[
+                15.height,
+                Text(
+                  "Choose a Relationship",
+                  maxLines: 1,
+                  softWrap: true,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: AppColors.red,
+                  ),
+                ),
+              ],
               60.height,
               Button(
-                onPress: () {},
+                onPress: () {
+                  _add();
+                },
                 text: "Add",
               )
             ],
@@ -237,16 +285,18 @@ class _AddBabyState extends State<AddBaby> {
                 if (index == 0) ...[
                   Icon(
                     MdiIcons.genderMale,
-                    size: 14.sp,
+                    size: 18.sp,
+                    color: AppColors.grey1,
                   ),
-                  10.width,
+                  3.width,
                 ],
                 if (index == 1) ...[
                   Icon(
                     MdiIcons.genderFemale,
-                    size: 14.sp,
+                    size: 18.sp,
+                    color: AppColors.grey1,
                   ),
-                  10.width,
+                  3.width,
                 ],
                 Text(
                   text,
@@ -276,6 +326,7 @@ class _AddBabyState extends State<AddBaby> {
           onTap: () {
             setState(() {
               relationshipValue = index;
+              relationshipError = relationshipValue == 0 ? true : false;
             });
           },
           splashColor: AppColors.black.withOpacity(.2),
