@@ -71,7 +71,7 @@ class _DashBoardState extends State<DashBoard> {
                               ? "assets/image/male.png"
                               : userProvider.gender == 1
                                   ? "assets/image/female.png"
-                                  : ""),
+                                  : "assets/image/neutral.png"),
                         ),
                       ),
                     ),
@@ -450,6 +450,7 @@ class _DashBoardState extends State<DashBoard> {
                                   text: TextSpan(
                                     style: TextStyle(
                                       color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 16.sp,
                                     ),
                                     children: [

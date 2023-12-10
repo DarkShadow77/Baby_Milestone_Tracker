@@ -74,7 +74,7 @@ class _MilestoneState extends State<Milestone>
                           ? "assets/image/male.png"
                           : userProvider.gender == 1
                               ? "assets/image/female.png"
-                              : ""),
+                              : "assets/image/neutral.png"),
                     ),
                   ),
                 ),
