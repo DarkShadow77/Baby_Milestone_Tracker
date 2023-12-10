@@ -71,9 +71,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     },
     {
       "image": "assets/image/onboarding_image/baby3.png",
-      "title": "Stimulate Growth!",
+      "title": "Tips & Advices!",
       "subtitle":
-          "See your baby's milestone achievements & Plans \n to boost the development process",
+          "View tips and advices accumulated from various \nparent to help take care of your baby more",
     },
   ];
 
