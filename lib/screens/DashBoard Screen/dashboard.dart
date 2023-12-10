@@ -404,6 +404,7 @@ class _DashBoardState extends State<DashBoard> {
                                   text: TextSpan(
                                     style: TextStyle(
                                       color: AppColors.white,
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 16.sp,
                                     ),
                                     children: [
